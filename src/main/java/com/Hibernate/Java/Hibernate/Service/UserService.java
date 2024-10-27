@@ -3,6 +3,7 @@ package com.Hibernate.Java.Hibernate.Service;
 import com.Hibernate.Java.Hibernate.Entity.UserEntity;
 import com.Hibernate.Java.Hibernate.Repository.UserEntiryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +12,8 @@ import java.util.Optional;
 @Service
 public class UserService {
 
+    @Autowired
+    Environment env;
     @Autowired
     UserEntiryRepository userRepository;
     public List<UserEntity> getUsers(){
@@ -48,5 +51,15 @@ public class UserService {
 
     public List<UserEntity> getUserByCustomQuery(String username){
         return userRepository.findByUsernameContaining(username);
+    }
+
+    public String getEnv(){
+        try {
+            String variable = env.getProperty("env");
+            return variable;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "live";
     }
 }

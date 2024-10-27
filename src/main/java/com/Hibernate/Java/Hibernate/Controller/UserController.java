@@ -20,6 +20,11 @@ public class UserController {
         return "This is a test";
     }
 
+    @GetMapping("/get/tomcatEnv")
+    public String getEnvironment(){
+        return userService.getEnv();
+    }
+
     @GetMapping("/allUsers")
     public List<UserEntity> getAllUser(){
         return userService.getUsers();
